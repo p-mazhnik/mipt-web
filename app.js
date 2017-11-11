@@ -30,7 +30,7 @@ function add_my_tags(input_string) {
     theLi.appendChild(button);
     theUl.appendChild(theLi);
     document.getElementById("root").appendChild(theUl); //DOM API
-    $('#root').append(theUl); // jQuery
+    //$('#root').append(theUl); // jQuery
 }
 
 function my_delete () {
