@@ -3,6 +3,7 @@ add_my_tags(input_string);
 
 var theInput = document.createElement('input');
 theInput.setAttribute('id', 'add_task_input');
+theInput.setAttribute('type', 'text');
 var add_task_button = document.createElement('button');
 add_task_button.setAttribute('id', 'add_task');
 add_task_button.addEventListener('click', add_task);
