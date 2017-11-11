@@ -13,12 +13,10 @@ function add_my_tags(input_string) {
     theLi.appendChild(theSpan);
     theLi.appendChild(button);
     theUl.appendChild(theLi);
-    document.getElementById("root").appendChild(theUl); //DOM API
-    alert("error_1");
-    //$('#root').append(theUl); // jQuery
+    //document.getElementById("root").appendChild(theUl); //DOM API
+    $('#root').append(theUl); // jQuery
 }
 
-alert("error_2");
 var theInput = document.createElement('input');
 theInput.setAttribute('id', 'add_task_input');
 theInput.setAttribute('type', 'text');
