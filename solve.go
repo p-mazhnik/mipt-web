@@ -1,15 +1,15 @@
 package main
 
 import (
-	//"fmt"
 	"unicode"
 	"strings"
+	//"fmt"
 )
 
 func RemoveEven(input []int) []int {
 	slice := make([]int, 0)
 	for i := range input {
-		if i%2 == 1 {
+		if input[i]%2 == 1 {
 			slice = append(slice, input[i])
 		}
 	}
@@ -54,14 +54,14 @@ func PowerGenerator(a int) func() int{
 
 /*func main() {
 	//1
-	*//*input := []int{0, 3, 2, 5}
+	input := []int{0, 10}
 	result := RemoveEven(input)
-	fmt.Println(result) // Должно напечататься [3 5]*//*
+	fmt.Println(result) // Должно напечататься []
 	//2
-	*//*gen := PowerGenerator(2)
+	gen := PowerGenerator(2)
 	fmt.Println(gen()) // Должно напечатать 2
 	fmt.Println(gen()) // Должно напечатать 4
-	fmt.Println(gen()) // Должно напечатать 8*//*
+	fmt.Println(gen()) // Должно напечатать 8
 	//3
-	//fmt.Println(DifferentWordsCount("Hello, world!HELLO  wOrlD...12")) // Должно напечатать 2
+	fmt.Println(DifferentWordsCount("Hello, world!HELLO  wOrlD...12")) // Должно напечатать 2
 }*/
