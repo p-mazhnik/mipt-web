@@ -2,8 +2,7 @@ package main
 
 import (
 	"unicode"
-	"strings"
-	//"fmt"
+	"fmt"
 )
 
 func RemoveEven(input []int) []int {
@@ -17,30 +16,30 @@ func RemoveEven(input []int) []int {
 }
 
 func DifferentWordsCount(s string) int {
-	result := make([]string, 1)
+	allWords := make([]string, 1)
 	var j = 0
 	var isNotWord = false
 	for i:= range s {
 		if unicode.IsLetter(rune(s[i])){
 			//fmt.Println(string(unicode.ToLower(rune(s[i]))))
-			result[j] = result[j] + string(unicode.ToLower(rune(s[i])))
+			allWords[j] = allWords[j] + string(unicode.ToLower(rune(s[i])))
 			isNotWord = false
 		} else if !isNotWord {
 			isNotWord = true
-			result = append(result, "")
+			allWords = append(allWords, "")
 			j = j + 1
 		}
 	}
-	/*for i := range result {
-		fmt.Println(result[i])
+	/*for i := range allWords {
+		fmt.Println(allWords[i])
 	}*/
-	var countDifWords = 0
-	for i := 0; i < len(result) - 1; i++ {
-		if strings.Compare(result[0], result[i]) != 0 {
-			countDifWords++
+	result := make(map[string]int)
+	for i := 0; i < len(allWords); i++ {
+		if allWords[i] != "" {
+			result[allWords[i]]++
 		}
 	}
-	return countDifWords
+	return len(result)
 }
 
 func PowerGenerator(a int) func() int{
@@ -63,5 +62,5 @@ func PowerGenerator(a int) func() int{
 	fmt.Println(gen()) // Должно напечатать 4
 	fmt.Println(gen()) // Должно напечатать 8
 	//3
-	fmt.Println(DifferentWordsCount("Hello, world!HELLO  wOrlD...12")) // Должно напечатать 2
+	fmt.Println(DifferentWordsCount("/c/ // ///a b")) // Должно напечатать 3
 }*/
