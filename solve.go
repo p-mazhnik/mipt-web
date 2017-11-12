@@ -2,7 +2,7 @@ package main
 
 import (
 	"unicode"
-	"fmt"
+	//"fmt"
 )
 
 func RemoveEven(input []int) []int {
