@@ -3,7 +3,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Главная</title>
 <style type="text/css">
-    .title {font-size: 50px}
+    .title {font-size: 50px; color: aliceblue}
+    .social_network{
+        height: 32px;
+        width: 32px;
+    }
     .button {
         background: url("img/Knopka.jpg") no-repeat;
         height: 40px;
@@ -23,17 +27,23 @@
   <tr>
     <th scope="row"></th>
 	<b>
-	<span style="text-align: center; font-size: 20px; white-space: pre-line; font-weight: bold; color: #000000; font-style: italic; text-decoration: underline;">
-        <script src="scripts/today_date.js"></script>
-   </span>
+        <span id="date" style="text-align: center; font-size: 20px; white-space: pre-line; font-weight: bold; color: #000000; font-style: italic; text-decoration: underline;">
+            <script src="scripts/today_date.js"></script>
+        </span>
    </b>
   </tr>
 </table>
  <table width="889" border="0" align="center">
   <tr>
     <td width="496" height="200" bgcolor="#FFFFFF"><img id="animal_img" width="496" height="346"  src="img/Zubr.bmp"/></td>
-    <td width="383" align="center" bordercolor="#FFFFFF" bgcolor="#666666"><h1 class="title">Pavel Mazhnik</h1>
-    <p class="title"> </p></td>
+    <td width="383" align="center" bordercolor="#FFFFFF" bgcolor="#666666">
+        <h1 class="title">
+            Pavel Mazhnik
+        </h1>
+        <a href="https://vk.com/p.mazhnik"><input class="social_network" type="image" alt="VK" src="img/vk.png"></a>
+        <input class="social_network" type="image" alt="YA" src="img/ya.png">
+        <input class="social_network" type="image" alt="FB" src="img/f.png">
+        <p class="title"> </p></td>
   </tr>
   <tr>
     <td valign="top" bgcolor="#CCCCCC">
@@ -49,10 +59,8 @@
         </div>
     </td>
     <td>
-        <div style="text-align: center;" class="text">
-        <strong>
+        <div id="welcome" style="text-align: center;" class="text">
             Добро пожаловать!
-        </strong>
         </div>
     </td>
   </tr>
@@ -69,8 +77,9 @@
   <table width="300" border="0">
     <tr>
       <th height="19" scope="row">
-          <a href="index.html"><img src="img/22px-Flag_of_Russia.svg.jpg" width="31" height="17" /></a>
-          <a href=""><img src="img/30px-Flag_of_the_United_Kingdom.svg.jpg" width="26" height="17" /></a>
+          <input type="image" id="RU_button" alt="RU" src="img/22px-Flag_of_Russia.jpg" width="26px" height="17px">
+          <input type="image" id="ENG_button" alt="ENG" src="img/30px-Flag_of_the_United_Kingdom.jpg" width="26px" height="17px">
+          <script src="scripts/language.js"></script>
       </th>
     </tr> 
   </table>
