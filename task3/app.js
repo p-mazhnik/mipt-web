@@ -5,8 +5,13 @@ theInput.setAttribute('id', 'add_task_input');
 theInput.setAttribute('type', 'text');
 var add_task_button = document.createElement('button');
 add_task_button.setAttribute('id', 'add_task');
-add_task_button.addEventListener('click', add_task);
+add_task_button.onclick = add_task;
 add_task_button.innerHTML = "Добавить";
+theInput.onkeydown = function (e) {
+    if(e.keyCode == "13") {
+        document.getElementById('add_task').onclick();
+    }
+};
 document.getElementById("root").appendChild(theInput);
 document.getElementById("root").appendChild(add_task_button);
 /*$('#root').prepend($('#add_task')); // делаю эл-т первым
