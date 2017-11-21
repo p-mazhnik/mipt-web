@@ -39,12 +39,14 @@ function my_delete () {
 
 document.getElementById("root").appendChild(theUl); //DOM API
 
-document.getElementById("body").addEventListener('keydown', enter_click);
-function enter_click (e) {
+document.getElementById("body").addEventListener('keydown', click_on_keyboard);
+function click_on_keyboard (e) {
     if(e.keyCode == "13") {
         add_task_button.onclick();
     }
     if(e.keyCode == "46"){
         theUl.remove();
+        theUl = document.createElement('ul');
+        document.getElementById("root").appendChild(theUl);
     }
 }
