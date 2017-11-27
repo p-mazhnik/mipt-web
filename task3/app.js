@@ -34,7 +34,7 @@ function add_my_tags(input_string) {
 
 function my_delete () {
     //this.parentNode.parentNode.removeChild(this.parentNode);
-    this.remove();
+    this.parentNode.remove();
 }
 
 document.getElementById("root").appendChild(theUl); //DOM API
