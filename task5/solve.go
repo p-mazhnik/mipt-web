@@ -4,6 +4,7 @@ import (
 	"github.com/gorilla/mux"
 	"net/http"
 	"encoding/json"
+	"strconv"
 )
 
 type LongUrl struct {
@@ -11,19 +12,18 @@ type LongUrl struct {
 }
 
 type ShortUrl struct {
-	Key  string `json:"key"`
+	Key  int `json:"key"`
 }
 
 var(
 	keyId = 0
-	KeyString = "q"
-	URLStore = make(map[ShortUrl]LongUrl)
+	URLStore = make(map[int]string)
 )
 
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", AddURL).Methods("POST")
-	r.HandleFunc("/{key}", GetURL).Methods("GET") //Фигурные скобки означают переменную
+	r.HandleFunc("/{key}", GetURL)/*.Methods("GET")*/ //Фигурные скобки означают переменную
 	http.ListenAndServe(":8082", r)
 }
 
@@ -32,10 +32,11 @@ func AddURL(w http.ResponseWriter, r *http.Request) {
 	//w - ответ
 	var MyLongUrl LongUrl
 	json.NewDecoder(r.Body).Decode(&MyLongUrl) // записали в itemAdd информацию из json-строки
-
+	//fmt.Print(MyLongUrl.Url + "\n")
 	var MyShortUrl ShortUrl
-	MyShortUrl.Key = KeyString + string(keyId)
-	URLStore[MyShortUrl] = MyLongUrl //записали URL в мэпу
+	MyShortUrl.Key = keyId
+	//fmt.Print(MyShortUrl.Key)
+	URLStore[MyShortUrl.Key] = MyLongUrl.Url //записали URL в мэпу
 	keyId += 1
 
 	j, err := json.Marshal(MyShortUrl)
@@ -47,11 +48,22 @@ func AddURL(w http.ResponseWriter, r *http.Request) {
 
 func GetURL(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
-	Input := vars["key"]
+	InputString := vars["key"]
+	//fmt.Printf(InputString)
+
+	Input, err := strconv.Atoi(InputString)
+	if err != nil {
+		panic(err)
+	}
 	var MyShortUrl ShortUrl
 	MyShortUrl.Key = Input
-	if len(Input) > 0 {
-		w.WriteHeader(http.StatusMovedPermanently)
-		w.Header().Set("Location", URLStore[MyShortUrl].Url)
+	w.WriteHeader(http.StatusMovedPermanently)
+	w.Header().Set("Location", URLStore[MyShortUrl.Key])
+	var MyLongUrl LongUrl
+	MyLongUrl.Url = URLStore[MyShortUrl.Key]
+	j, err := json.Marshal(MyLongUrl)
+	if err != nil {
+		panic(err)
 	}
+	w.Write(j)
 }
