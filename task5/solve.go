@@ -32,24 +32,18 @@ func AddURL(w http.ResponseWriter, r *http.Request) {
 	//w - ответ
 	var MyLongUrl LongUrl
 	json.NewDecoder(r.Body).Decode(&MyLongUrl) // записали в itemAdd информацию из json-строки
-	//fmt.Print(MyLongUrl.Url + "\n")
+
 	var MyShortUrl ShortUrl
 	MyShortUrl.Key = keyId
-	//fmt.Print(MyShortUrl.Key)
 	URLStore[MyShortUrl.Key] = MyLongUrl.Url //записали URL в мэпу
 	keyId += 1
 
-	j, err := json.Marshal(MyShortUrl)
-	if err != nil {
-		panic(err)
-	}
-	w.Write(j)
+	json.NewEncoder(w).Encode(&MyShortUrl)
 }
 
 func GetURL(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	InputString := vars["key"]
-	//fmt.Printf(InputString)
 
 	Input, err := strconv.Atoi(InputString)
 	if err != nil {
