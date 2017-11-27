@@ -12,7 +12,7 @@ type LongUrl struct {
 }
 
 type ShortUrl struct {
-	Key  int `json:"key"`
+	Key  string `json:"key"`
 }
 
 var(
@@ -34,8 +34,8 @@ func AddURL(w http.ResponseWriter, r *http.Request) {
 	json.NewDecoder(r.Body).Decode(&MyLongUrl) // записали в itemAdd информацию из json-строки
 
 	var MyShortUrl ShortUrl
-	MyShortUrl.Key = keyId
-	URLStore[MyShortUrl.Key] = MyLongUrl.Url //записали URL в мэпу
+	MyShortUrl.Key = strconv.Itoa(keyId)
+	URLStore[keyId] = MyLongUrl.Url //записали URL в мэпу
 	keyId += 1
 
 	json.NewEncoder(w).Encode(&MyShortUrl)
@@ -49,14 +49,12 @@ func GetURL(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err)
 	}
-	var MyShortUrl ShortUrl
-	MyShortUrl.Key = Input
 
-	w.Header().Set("Location", URLStore[MyShortUrl.Key])
+	w.Header().Set("Location", URLStore[Input])
 	w.WriteHeader(http.StatusMovedPermanently)
-	/*var MyLongUrl LongUrl
-	MyLongUrl.Url = URLStore[MyShortUrl.Key]
-	j, err := json.Marshal(MyLongUrl)
+	var MyLongUrl LongUrl
+	MyLongUrl.Url = URLStore[Input]
+	/*j, err := json.Marshal(MyLongUrl)
 	if err != nil {
 		panic(err)
 	}
