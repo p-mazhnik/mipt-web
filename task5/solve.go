@@ -57,13 +57,14 @@ func GetURL(w http.ResponseWriter, r *http.Request) {
 	}
 	var MyShortUrl ShortUrl
 	MyShortUrl.Key = Input
-	w.WriteHeader(http.StatusMovedPermanently)
+
 	w.Header().Set("Location", URLStore[MyShortUrl.Key])
-	var MyLongUrl LongUrl
+	w.WriteHeader(http.StatusMovedPermanently)
+	/*var MyLongUrl LongUrl
 	MyLongUrl.Url = URLStore[MyShortUrl.Key]
 	j, err := json.Marshal(MyLongUrl)
 	if err != nil {
 		panic(err)
 	}
-	w.Write(j)
+	w.Write(j)*/
 }
