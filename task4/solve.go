@@ -44,10 +44,10 @@ func DifferentWordsCount(s string) int {
 
 func PowerGenerator(a int) func() int{
 	b := a
-	return func() (pow int) {
-		pow = b
+	return func() (int) {
+		pow := b
 		b = b * a
-		return
+		return pow
 	}
 }
 
