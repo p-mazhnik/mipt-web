@@ -1,0 +1,16 @@
+cd mipt-web
+
+git init
+git add README.md
+git commit -m "insert yout commit_name here"
+git remote add mipt-web git@github.com:p-mazhnik/mipt-web.git
+git push -u mipt-web master
+
+git checkout -b task1
+git add task1
+git commit -m "WEBTASK-1"
+git push -u mipt-web task1
+
+git checkout master
+git merge task1 --no-ff -m "Merge branch ‘task1’"
+git push mipt-web master
